@@ -17,8 +17,9 @@ class ProposersController < ApplicationController
   def create
     @proposer = Proposer.new(proposer_params)
     @proposer.user_id = current_user.id
+
     if @proposer.save
-      render json: @proposer, status: :created
+      redirect_to :root
     else
       render json: @proposer.errors, status: :unprocessable_entity
     end

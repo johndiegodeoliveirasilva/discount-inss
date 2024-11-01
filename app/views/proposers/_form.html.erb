@@ -1,46 +1,99 @@
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col col-xl-10">
-        <div class="card" style="border-radius: 1rem;">
-          <div class="row g-0">
-              <div class="card-body p-4 p-lg-5 text-black">
-                <%= form_for @proposer do |f| %>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <%= f.label :full_name %>
-                      <%= f.text_field :full_name, class: 'form-control' %>
-                    </div>
+<div class="row d-flex justify-content-center align-items-center h-100">
+  <div class="col col-xl-12">
+    <div class="card" style="border-radius: 1rem; width: 100%;">
+      <div class="row g-0">
+        <div class="card-body p-4 p-lg-5 text-black">
+          <%= form_for @proposer do |f| %>
+          <div class="row">
+            <!-- Seção de Informações Pessoais -->
+            <div class="col-md-6">
+              <h3>Personal Information</h3>
+              <div class="form-group">
+                <%= f.label :full_name %>
+                <%= f.text_field :full_name, class: 'form-control' %>
+              </div>
 
-                    <div class="form-group">
-                      <%= f.label :document %>
-                      <%= f.text_field :document, class: 'form-control' %>
-                    </div>
+              <div class="form-group">
+                <%= f.label :document %>
+                <%= f.text_field :document, class: 'form-control' %>
+              </div>
 
-                    <div class="form-group">
-                      <%= f.label :birth_date %>
-                      <%= f.date_field :birth_date, class: 'form-control' %>
-                    </div>
-                  </div>
-
-                  <div class="col-md-6">
-                    <h3>Phones</h3>
-                      <div>
-                        <%= f.fields_for :phones do |phone_form| %>
-                        <%= render 'phone_fields', f: phone_form %>
-                      <% end %>
-
-                      <div>
-                        <%= link_to_add_association 'Add Phone', f, :phones, class: "btn btn-primary" %>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <%= f.submit 'Save Portfolio Item', class: 'btn btn-primary btn-block' %>
-                  </div>
-                </div>
-                <% end %>
+              <div class="form-group">
+                <%= f.label :birth_date %>
+                <%= f.date_field :birth_date, class: 'form-control' %>
               </div>
             </div>
+
+            <div class="col-md-6">
+              <h3>Phones</h3>
+              <div>
+                <%= f.fields_for :phones do |phone_form| %>
+                  <%= render 'phone_fields', f: phone_form %>
+                <% end %>
+                <div>
+                  <%= link_to_add_association 'Add Phone', f, :phones, class: "btn btn-primary" %>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12 mt-4">
+              <hr>
+              <h3>Address</h3>
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <%= f.label :zip_code %>
+                    <%= text_field_tag :zip_code, nil, class: 'form-control', require: true %>
+                  </div>
+                </div>
+
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <%= f.label :state %>
+                    <%= text_field_tag :state, nil, class: 'form-control' %>
+                  </div>
+                </div>
+
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <%= f.label :city %>
+                    <%= text_field_tag :city, nil, class: 'form-control' %>
+                  </div>
+                </div>
+
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <%= f.label :neighborhood %>
+                    <%= text_field_tag :neighborhood, nil, class: 'form-control' %>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mt-3">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <%= f.label :number %>
+                    <%= text_field_tag :number, nil, class: 'form-control' %>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <%= f.label :complement %>
+                    <%= text_field_tag :number, nil,  class: 'form-control' %>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Botão de envio -->
+            <div class="form-group mt-4 text-center">
+              <%= f.submit 'Save Portfolio Item', class: 'btn btn-primary btn-block' %>
+            </div>
+          </div>
+          <% end %>
         </div>
       </div>
     </div>
+  </div>
+</div>
