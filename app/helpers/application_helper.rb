@@ -19,7 +19,7 @@ module ApplicationHelper
         title: 'Home'
       },
       {
-        url: new_proposer_path,
+        url: proposers_path,
         title: 'Proponentes'
       },
       {
