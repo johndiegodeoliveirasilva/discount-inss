@@ -5,15 +5,4 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Discount INSS</title>
   </head>
-  <body>
-    <div class="mm-button-content">
-     <% if user_signed_in? %>
-        <%= link_to 'Edit Perfil', edit_user_registration_path, class: 'mm-cl-white' %>
-        <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'mm-cl-white' %>
-      <% else %>
-        <%= link_to 'Sign Up', new_user_registration_path, class: 'mm-cl-white' %>
-        <%= link_to 'Sign in', new_user_session_path, class: 'mm-cl-white' %>
-      <% end %>
-    </div>
-  </body>
 </html>
