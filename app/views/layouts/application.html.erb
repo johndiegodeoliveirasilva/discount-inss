@@ -12,11 +12,12 @@
   <body class="text-center">
     <div class="cover-container d-flex w-100 p-3 mx-auto flex-column">
       <% if user_signed_in? %>
-        <%= image_tag('home_bg.png', class: 'img-fluid', id: 'background') %>
+        <%= image_tag('home_bg.png', class: 'img-fluid transparent-background', id: 'background') %>
       <% else %>
         <%= video_tag(
           "finance_30fps.mp4",
           id: 'background',
+          class: 'transparent-background',
           autoplay: true,
           loop: true,
           muted: true,
