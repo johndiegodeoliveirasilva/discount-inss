@@ -1,26 +1,40 @@
-<h2>Log in</h2>
+<section class="vh-100">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-xl-10">
+        <div class="card" style="border-radius: 1rem;">
+          <div class="row g-0">
+            <div class="col-md-6 col-lg-5 d-none d-md-block">
+              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img1.webp"
+                alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
+            </div>
+            <div class="col-md-6 col-lg-7 d-flex align-items-center">
+              <div class="card-body p-4 p-lg-5 text-black">
+                <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                  <%= render "devise/shared/error_messages", resource: resource %>
+                  <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Login</h5>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+                  <div data-mdb-input-init class="form-outline mb-4">
+                    <%= f.email_field :email, autofocus: true, class: "form-control form-control-lg" %>
+                    <label class="form-label" for="form2Example17">Email address</label>
+                  </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+                  <div data-mdb-input-init class="form-outline mb-4">
+                    <%= f.password_field :password, class: "form-control form-control-lg" %>
+                    <label class="form-label" for="form2Example27">Password</label>
+                  </div>
+              
+                  <div class="actions">
+                    <%= f.submit "Log in", class: "btn btn-dark btn-lg btn-block" %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
+</section>
 
 <%= render "devise/shared/links" %>
