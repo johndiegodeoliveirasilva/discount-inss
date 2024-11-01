@@ -1,0 +1,14 @@
+AllCops:
+  Exclude:
+    - 'config/**/*.rb'
+    - 'db/**/*.rb'
+    - 'lib/**/*.rb'
+    - 'spec/**/*.rb'
+    - 'test/**/*.rb'
+    - 'bin/**/*.rb'
+    - 'bin/**/*'
+    - config.ru
+    - Rakefile
+Documentation:
+  Enabled: false
+
