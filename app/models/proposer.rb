@@ -6,5 +6,5 @@ class Proposer < ApplicationRecord
   has_many :phones
 
   accepts_nested_attributes_for :phones, reject_if: :all_blank, allow_destroy: true
-  validates :full_name, :document, :birth_date, :income, presence: true
+  validates :full_name, :document, :birth_date, presence: true
 end

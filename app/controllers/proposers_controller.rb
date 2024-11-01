@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProposersController < ApplicationController
   before_action :authenticate_user!
 
@@ -14,6 +16,6 @@ class ProposersController < ApplicationController
   private
 
   def proposer_params
-    params.require(:proposer).permit(:document, :full_name, :birth_date, phones_attributes: [:id, :number, :phone_type])
+    params.require(:proposer).permit(:document, :full_name, :birth_date, phones_attributes: %i[id number phone_type])
   end
 end

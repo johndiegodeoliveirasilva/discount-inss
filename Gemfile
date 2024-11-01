@@ -10,7 +10,7 @@ gem 'rails', '~> 5.2.8', '>= 5.2.8.1'
 # Use pg as the database for Active Record
 gem 'pg', '~> 1.5', '>= 1.5.9'
 
-gem "cocoon"
+gem 'cocoon'
 
 # Loads environment variables from `.env`.
 gem 'dotenv', '~> 2.8', '>= 2.8.1'
@@ -95,11 +95,9 @@ group :test do
   gem 'rspec-rails', '~> 5.1', '>= 5.1.2'
   # Strategies for cleaning databases using ActiveRecord. Can be used to ensure a clean state for testing.
   gem 'database_cleaner-active_record', '~> 2.2'
-
   gem 'factory_bot_rails', '~> 5.2'
-
-  gem 'simplecov', require: false
   gem 'rails-controller-testing'
+  gem 'simplecov', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
