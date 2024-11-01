@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_11_01_125513) do
+ActiveRecord::Schema.define(version: 2024_11_01_131325) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,13 @@ ActiveRecord::Schema.define(version: 2024_11_01_125513) do
     t.string "state"
     t.string "zip_code"
     t.index ["proposer_id"], name: "index_addresses_on_proposer_id"
+  end
+
+  create_table "phones", force: :cascade do |t|
+    t.bigint "proposer_id"
+    t.string "number"
+    t.string "phone_type"
+    t.index ["proposer_id"], name: "index_phones_on_proposer_id"
   end
 
   create_table "proposers", force: :cascade do |t|
@@ -48,5 +55,6 @@ ActiveRecord::Schema.define(version: 2024_11_01_125513) do
   end
 
   add_foreign_key "addresses", "proposers"
+  add_foreign_key "phones", "proposers"
   add_foreign_key "proposers", "users"
 end
