@@ -17,10 +17,11 @@
         autoplay: true,
         loop: true,
         muted: true,
-        playsinline: true,
-        class: "video"
+        poster: "home_bg.png",
       ) %>
+      <%= render 'shared/navbar' %>
       <%= yield %>
+      <%= render 'shared/footer' %>
     </div>
   </body>
 </html>
