@@ -1,3 +1,5 @@
+<%= hidden_field_tag :proposer_id, @proposer_id %>
+
 <section class="vh-1110">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -12,7 +14,12 @@
               <label class="form-label" for="typeEmailX-2">Type Income</label>
             </div>
 
-            <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block" type="submit">Calculate</button>
+            <div data-mdb-input-init class="form-outline mb-4">
+              <%= number_field_tag :tax_value, '', class: 'form-control', min: 0, step: 0.01, disabled: true %>
+              <label class="form-label" for="typeEmailX-2">Tax</label>
+            </div>
+
+            <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block" id="finances_submit" type="submit">Save</button>
           </div>
         </div>
       </div>
@@ -20,3 +27,4 @@
   </div>
 </section>
 
+<%= javascript_include_tag 'calculate_inss' %>
