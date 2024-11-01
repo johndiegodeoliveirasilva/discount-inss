@@ -4,4 +4,6 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
   resources :proposers, only: :create
+
+  get "report", to: "reports#show", as: "report_screen"
 end
