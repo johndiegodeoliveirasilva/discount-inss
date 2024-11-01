@@ -28,3 +28,6 @@ Certifique-se de que você possui as seguintes ferramentas instaladas:
 ```bash
 git clone https://github.com/seu-usuario/nome-do-projeto.git
 cd nome-do-projeto
+```
+### Configure as variaveis de ambiente do banco de dados
+Crie um arquivo ```.env```
