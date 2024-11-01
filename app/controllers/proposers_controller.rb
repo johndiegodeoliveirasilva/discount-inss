@@ -3,7 +3,9 @@
 class ProposersController < ApplicationController
   before_action :authenticate_user!
 
-  def index; end
+  def index
+    @proposers = Proposer.page(params[:page]).per(5)
+  end
 
   def new
     @proposer = Proposer.new
