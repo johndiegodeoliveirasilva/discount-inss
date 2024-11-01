@@ -18,12 +18,11 @@
     <%= f.text_field :document, autofocus: true, maxlength: 11 %>
   </div>
   
-<div class="field">
+  <div class="field">
     <%= f.label :birth_date %><br />
     <%= f.date_field :birth_date, autofocus: true %>
   </div>
   
-
   <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>
