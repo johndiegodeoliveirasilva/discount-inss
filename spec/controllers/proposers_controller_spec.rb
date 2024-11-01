@@ -3,8 +3,9 @@ require 'rails_helper'
 RSpec.describe ProposersController, type: :controller do
   let(:user) { create(:user) }
 
-  describe 'POST #create' do
+  before { sign_in user }
 
+  describe 'POST #create' do
     context 'when is valid' do
       let(:valid_attributes) do
         {
@@ -33,6 +34,12 @@ RSpec.describe ProposersController, type: :controller do
       it 'returns a status code of :created' do
         post :create, params: valid_attributes
         expect(response).to have_http_status(:created)
+      end
+
+      it 'create phones' do
+        post :create, params: valid_attributes
+
+        expect(Proposer.last.phones.count).to eq(2)
       end
     end
 
