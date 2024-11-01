@@ -19,7 +19,7 @@ class ProposersController < ApplicationController
     @proposer.user_id = current_user.id
 
     if @proposer.save
-      redirect_to :root
+      redirect_to new_proposer_finance_url(@proposer)
     else
       render json: @proposer.errors, status: :unprocessable_entity
     end

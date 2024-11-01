@@ -3,7 +3,9 @@ Rails.application.routes.draw do
 
   root to: 'home#index'
 
-  resources :proposers, only: %w[create new index show]
+  resources :proposers, only: %w[create new index show] do
+    resources :finances, only: :new
+  end
 
   get "report", to: "reports#show", as: "report_screen"
 end

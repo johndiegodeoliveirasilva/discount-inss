@@ -1,0 +1,22 @@
+<section class="vh-1110">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card shadow-2-strong" style="border-radius: 1rem;">
+          <div class="card-body p-5 text-center">
+
+            <h3 class="mb-5">Calculator INSS</h3>
+
+            <div data-mdb-input-init class="form-outline mb-4">
+              <%= number_field_tag :price, '', class: 'form-control', placeholder: '$1000.00', min: 0, step: 0.01 %>
+              <label class="form-label" for="typeEmailX-2">Type Income</label>
+            </div>
+
+            <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block" type="submit">Calculate</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
