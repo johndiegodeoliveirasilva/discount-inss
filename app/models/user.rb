@@ -7,4 +7,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_one :address, dependent: :destroy
+  has_many :proposers, dependent: :destroy
 end
