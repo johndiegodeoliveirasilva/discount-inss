@@ -30,7 +30,6 @@ services:
     environment:
       RAILS_ENV: development
       REDIS_URL: redis://redis:6379/0
-      DATABASE_URL: postgres://postgres:postgres@db:5432/postgres
 
   web:
     stdin_open: true
@@ -39,6 +38,7 @@ services:
     build: .
     command: >
       bash -c "rm -f tmp/pids/server.pid &&
+      bundle exec rake db:create &&
       bundle exec rake db:migrate &&
       bundle exec rails s -p 3001 -b '0.0.0.0'"
     volumes:
@@ -49,5 +49,10 @@ services:
       - db
       - redis
       - sidekiq
+
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
 volumes:
   postgres:
