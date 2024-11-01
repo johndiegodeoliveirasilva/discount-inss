@@ -1,0 +1,46 @@
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-xl-10">
+        <div class="card" style="border-radius: 1rem;">
+          <div class="row g-0">
+              <div class="card-body p-4 p-lg-5 text-black">
+                <%= form_for @proposer do |f| %>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <%= f.label :full_name %>
+                      <%= f.text_field :full_name, class: 'form-control' %>
+                    </div>
+
+                    <div class="form-group">
+                      <%= f.label :document %>
+                      <%= f.text_field :document, class: 'form-control' %>
+                    </div>
+
+                    <div class="form-group">
+                      <%= f.label :birth_date %>
+                      <%= f.date_field :birth_date, class: 'form-control' %>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <h3>Phones</h3>
+                      <div>
+                        <%= f.fields_for :phones do |phone_form| %>
+                        <%= render 'phone_fields', f: phone_form %>
+                      <% end %>
+
+                      <div>
+                        <%= link_to_add_association 'Add Phone', f, :phones, class: "btn btn-primary" %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <%= f.submit 'Save Portfolio Item', class: 'btn btn-primary btn-block' %>
+                  </div>
+                </div>
+                <% end %>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>

@@ -19,11 +19,11 @@ module ApplicationHelper
         title: 'Home'
       },
       {
-        url: root_path,
-        title: 'Cadastro de Proponentes'
+        url: new_proposer_path,
+        title: 'Proponentes'
       },
       {
-        url: root_path,
+        url: report_screen_path,
         title: 'Relatorios'
       }
     ]
