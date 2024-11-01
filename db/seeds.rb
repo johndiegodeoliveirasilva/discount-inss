@@ -30,4 +30,11 @@ puts "Creating bulk Proposers"
     state: Faker::Address.state_abbr,
     zip_code: Faker::Address.zip_code,
     complement: Faker::Address.secondary_address)
+
+  2.times do |_|
+    proposer.phones.create!(
+      phone_type: "personal",
+      number: Faker::PhoneNumber.cell_phone
+    )
+  end
 end
