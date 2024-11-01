@@ -79,9 +79,9 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
-  #Simple testing of Sidekiq jobs via a collection of matchers and helpers
+  # Simple testing of Sidekiq jobs via a collection of matchers and helpers
   gem 'rspec-sidekiq', '~> 4.0', '>= 4.0.2'
-  #rspec-rails integrates the Rails testing helpers into RSpec.
+  # rspec-rails integrates the Rails testing helpers into RSpec.
   gem 'rspec-rails', '~> 5.1', '>= 5.1.2'
   # Strategies for cleaning databases using ActiveRecord. Can be used to ensure a clean state for testing.
   gem 'database_cleaner-active_record', '~> 2.2'
