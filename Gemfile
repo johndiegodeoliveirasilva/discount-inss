@@ -99,6 +99,7 @@ group :test do
   gem 'factory_bot_rails', '~> 5.2'
 
   gem 'simplecov', require: false
+  gem 'rails-controller-testing'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
