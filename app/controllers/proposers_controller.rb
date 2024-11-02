@@ -10,6 +10,7 @@ class ProposersController < ApplicationController
 
   def new
     @proposer = Proposer.new
+    @proposer.build_address
 
     respond_to do |format|
       format.html
@@ -60,6 +61,6 @@ class ProposersController < ApplicationController
   end
 
   def proposer_params
-    params.require(:proposer).permit(:document, :full_name, :birth_date, phones_attributes: %i[id number phone_type])
+    params.require(:proposer).permit(:document, :full_name, :birth_date, phones_attributes: %i[id number phone_type], address_attributes: %i[id zip_code state city neighborhood number complement])
   end
 end

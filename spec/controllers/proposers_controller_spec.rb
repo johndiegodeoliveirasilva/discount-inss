@@ -4,6 +4,14 @@ RSpec.describe ProposersController, type: :controller do
   let(:user) { create(:user) }
 
   before { sign_in user }
+  describe 'GET #index' do
+  end
+
+  describe 'GET #new' do
+  end
+
+  describe 'GET #edit' do
+  end
 
   describe 'POST #create' do
     context 'when is valid' do
@@ -13,7 +21,8 @@ RSpec.describe ProposersController, type: :controller do
           document: '12345678901',
           full_name: 'Jane Doe',
           birth_date: '1990-01-01',
-          phones_attributes: phones_attributes
+          phones_attributes: phones_attributes,
+          address_attributes: address_attributes
           }
        }
       end
@@ -25,21 +34,31 @@ RSpec.describe ProposersController, type: :controller do
         ]
       end
 
+      let(:address_attributes) do
+        { zip_code: '12345678', street: 'Main St', number: '123', complement: 'Apt 1', neighborhood: 'Downtown', city: 'City', state: 'State'}
+      end
+
       it 'creates a new Proposer' do
         expect {
           post :create, params: valid_attributes
         }.to change(Proposer, :count).by(1)
       end
 
-      it 'returns a status code of :created' do
+      it 'returns a status code of :redirect' do
         post :create, params: valid_attributes
-        expect(response).to have_http_status(:created)
+        expect(response).to have_http_status(:redirect)
       end
 
       it 'create phones' do
         post :create, params: valid_attributes
 
         expect(Proposer.last.phones.count).to eq(2)
+      end
+
+      it 'create address' do
+        post :create, params: valid_attributes
+
+        expect(Proposer.last.address).to be_present
       end
     end
 
@@ -74,5 +93,11 @@ RSpec.describe ProposersController, type: :controller do
         expect(json_response).to include("document", "full_name")
       end
     end
+  end
+
+  describe 'PUT #update' do
+  end
+
+  describe 'DELETE #destroy' do
   end
 end

@@ -39,54 +39,55 @@
             <div class="col-md-12 mt-4">
               <hr>
               <h3>Address</h3>
-              <div class="row">
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <%= f.label :zip_code %>
-                    <%= text_field_tag :zip_code, nil, class: 'form-control', require: true %>
+                <%= f.fields_for :address do |address_form| %>
+                <div class="row">
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <%= address_form.label :zip_code %>
+                      <%= address_form.text_field :zip_code,class: 'form-control', require: true %>
+                    </div>
+                  </div>
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <%= f.label :state %>
+                      <%= address_form.text_field :state, class: 'form-control' %>
+                    </div>
+                  </div>
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <%= f.label :city %>
+                      <%= address_form.text_field :city, class: 'form-control' %>
+                    </div>
+                  </div>
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <%= f.label :neighborhood %>
+                      <%= address_form.text_field :neighborhood,  class: 'form-control' %>
+                    </div>
                   </div>
                 </div>
 
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <%= f.label :state %>
-                    <%= text_field_tag :state, nil, class: 'form-control' %>
+                <div class="row mt-3">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <%= f.label :number %>
+                      <%= address_form.text_field :number,  class: 'form-control' %>
+                    </div>
                   </div>
-                </div>
 
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <%= f.label :city %>
-                    <%= text_field_tag :city, nil, class: 'form-control' %>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <%= f.label :complement %>
+                      <%= address_form.text_field :complement,   class: 'form-control' %>
+                    </div>
                   </div>
                 </div>
-
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <%= f.label :neighborhood %>
-                    <%= text_field_tag :neighborhood, nil, class: 'form-control' %>
-                  </div>
-                </div>
-              </div>
-
-              <div class="row mt-3">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <%= f.label :number %>
-                    <%= text_field_tag :number, nil, class: 'form-control' %>
-                  </div>
-                </div>
-
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <%= f.label :complement %>
-                    <%= text_field_tag :number, nil,  class: 'form-control' %>
-                  </div>
-                </div>
-              </div>
+              <% end %>
             </div>
 
-            <!-- Botão de envio -->
             <div class="form-group mt-4 text-center">
               <%= f.submit 'Save Portfolio Item', class: 'btn btn-primary btn-block' %>
             </div>
