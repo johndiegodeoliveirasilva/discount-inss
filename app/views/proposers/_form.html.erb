@@ -3,7 +3,7 @@
     <div class="card" style="border-radius: 1rem; width: 100%;">
       <div class="row g-0">
         <div class="card-body p-4 p-lg-5 text-black">
-          <%= form_for @proposer do |f| %>
+          <%= form_with(model: @proposer, local: true) do |f| %>
           <div class="row">
             <!-- Seção de Informações Pessoais -->
             <div class="col-md-6">
