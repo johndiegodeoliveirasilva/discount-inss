@@ -1,10 +1,6 @@
-services:
-  redis:
-    container_name: redis
-    image: redis:alpine
-    ports:
-      - "6379:6379"
+version: '3.8'
 
+services:
   db:
     image: postgres:latest
     container_name: db
@@ -16,23 +12,42 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
     volumes:
       - postgres:/var/lib/postgresql/data
+    networks:
+      - inss-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    env_file:
+      - .env
+
+  redis:
+    container_name: redis
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    networks:
+      - inss-network
+    volumes:
+      - redis:/data
+
   sidekiq:
     container_name: sidekiq
     build: .
-    command: bundle exec sidekiq
+    command: bundle exec sidekiq -C config/sidekiq.yml
     depends_on:
-      - db
-      - redis
-
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
     working_dir: /var/www/app
     volumes:
       - .:/var/www/app
-    environment:
-      RAILS_ENV: development
-      REDIS_URL: redis://redis:6379/0
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
+    env_file:
+      - .env
+    networks:
+      - inss-network
 
   web:
     stdin_open: true
@@ -49,13 +64,18 @@ services:
     ports:
       - "3001:3001"
     depends_on:
-      - db
-      - redis
-      - sidekiq
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    env_file:
+      - .env
+    networks:
+      - inss-network
 
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
+networks:
+  inss-network:
+
 volumes:
   postgres:
+  redis:

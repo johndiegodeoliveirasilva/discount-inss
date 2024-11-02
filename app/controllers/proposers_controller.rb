@@ -57,6 +57,9 @@ class ProposersController < ApplicationController
   end
 
   def proposer_params
-    params.require(:proposer).permit(:document, :full_name, :birth_date, phones_attributes: %i[id number phone_type], address_attributes: %i[id zip_code state city neighborhood number complement])
+    params.require(:proposer).permit(:document, :full_name, :birth_date, phones_attributes: %i[id number phone_type],
+                                                                         address_attributes: %i[id zip_code state city
+                                                                                                neighborhood number
+                                                                                                complement])
   end
 end

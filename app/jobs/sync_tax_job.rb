@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SyncTaxJob < ApplicationJob
   queue_as :high_priority
 
