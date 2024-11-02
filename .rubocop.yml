@@ -11,4 +11,5 @@ AllCops:
     - Rakefile
 Documentation:
   Enabled: false
-
+Metrics/BlockLength:
+  Max: 50
