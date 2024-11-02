@@ -5,6 +5,51 @@ RSpec.describe ProposersController, type: :controller do
 
   before { sign_in user }
   describe 'GET #index' do
+    before { get :index }
+
+    it 'returns a success response' do
+      expect(response).to be_successful
+    end
+
+    it 'returns a proper response' do
+      expect(response).to have_http_status(200)
+    end
+
+    it 'renders the index template' do
+      expect(response).to render_template(:index)
+    end
+
+    it 'assigns @proposers' do
+      proposer = create(:proposer)
+      expect(assigns(:proposers)).to eq([proposer])
+    end
+
+    context "when using the search" do
+      let(:proposer) { create(:proposer, full_name: 'John Doe') }
+      it 'returns the proposer' do
+        proposer
+        get :index, params: { q: { full_name_cont: "John" } }
+        expect(assigns(:proposers)).to eq([proposer])
+      end
+
+      context "when using multiples params" do
+        it 'returns 5 proposers' do
+          5.times { |i| create(:proposer, full_name: "John Doe #{i}") }
+
+          get :index, params: { q: { full_name_cont: "John" } }
+          expect(assigns(:proposers).count).to eq(5)
+        end
+      end
+
+      context "when using the pagination" do
+        it 'returns the proposer' do
+          6.times { |i| create(:proposer, full_name: "John Doe #{i}") }
+
+          get :index, params: { page: 2 }
+          expect(assigns(:proposers).count).to eq(1)
+        end
+      end
+    end
   end
 
   describe 'GET #new' do
@@ -75,7 +120,7 @@ RSpec.describe ProposersController, type: :controller do
           }
         }
       end
-  
+
       it 'does not create a new Proposer' do
         expect {
           post :create, params: invalid_attributes
