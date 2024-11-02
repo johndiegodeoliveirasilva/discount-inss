@@ -25,11 +25,11 @@ module Finances
 
     def group_by_income
       current_user.proposers.each do |proposer|
-        RANGE.each do |lower_bound, upper_bound|
-          next unless proposer.income.to_f >= lower_bound.to_f && proposer.income.to_f <= upper_bound.to_f
+        RANGE.each do |min_value, max_value|
+          next unless proposer.income.to_f >= min_value.to_f && proposer.income.to_f <= max_value.to_f
 
-          @range_counts["#{lower_bound}-#{upper_bound}"] = 0 if @range_counts["#{lower_bound}-#{upper_bound}"].nil?
-          @range_counts["#{lower_bound}-#{upper_bound}"] += 1
+          @range_counts["#{min_value}-#{max_value}"] = 0 if @range_counts["#{min_value}-#{max_value}"].nil?
+          @range_counts["#{min_value}-#{max_value}"] += 1
 
           break
         end

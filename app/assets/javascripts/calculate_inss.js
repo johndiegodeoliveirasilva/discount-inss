@@ -1,13 +1,21 @@
 $('#price').on('change', function (e) {
   $(function(){
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
     const price = $('#price').val()
     const propose_id = $('#proposer_id').val()
 
     $.ajax({
       url: `/proposers/${propose_id}/finances/calculate`,
-      data: { values: price,
-      dataType: "json"
-    }
+      method: "POST", 
+      contentType: "application/json", 
+      data: JSON.stringify({
+        value: price,
+      }),
+      dataType: "json",
+      headers: {
+        'X-CSRF-Token': csrfToken
+      }
     }).done(function(data){
       $('#tax_value').val(data.amount)
       $('#tax_value').maskMoney({

@@ -3,13 +3,12 @@ Rails.application.routes.draw do
 
   root to: 'home#index'
 
-  resources :proposers, only:%w[create new index show edit update destroy] do
-    get "finances/calculate", to: "finances#calculate"
-    post "finances/sync_tax", to: "finances#sync_tax"
-
+  resources :proposers, only: %w[create new index show edit update destroy] do
     resources :finances, only: %w[new] do
+      collection do
+        post :calculate
+        post :sync_tax
+      end
     end
   end
-
-  get "report", to: "reports#show", as: "report_screen"
 end
