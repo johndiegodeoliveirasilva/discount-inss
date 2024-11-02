@@ -57,6 +57,11 @@ class ProposersController < ApplicationController
 
   def proposer
     @proposer = Proposer.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    respond_to do |format|
+      format.html { redirect_to proposers_url, alert: 'Proposer not found.' }
+      format.json { render json: 'Proposer not found.', status: :not_found }
+    end
   end
 
   def proposer_params
