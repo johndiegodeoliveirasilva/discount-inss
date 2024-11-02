@@ -8,7 +8,8 @@ class FinancesController < ApplicationController
   end
 
   def calculate
-    render json: { amount: rand(151) }
+    amount = Finances::Inss::Calculate.new(params[:salary]).call
+    render json: { amount: amount }, status: :ok
   end
 
   def sync_tax
