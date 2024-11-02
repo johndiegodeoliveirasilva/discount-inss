@@ -1,15 +1,17 @@
+# frozen_string_literal: true
+
 module Finances
   module Inss
     class Calculate
-
       CONTRIBUTION_TABLE = [
         { limit: 1045.00, aliquot: 0.075 },
         { limit: 2089.60, aliquot: 0.09 },
         { limit: 3134.40, aliquot: 0.12 },
         { limit: 6101.06, aliquot: 0.14 }
-      ]
+      ].freeze
 
       attr_reader :base_salary
+
       def initialize(base_salary)
         @base_salary = base_salary.to_f
       end
@@ -32,7 +34,7 @@ module Finances
       private
 
       def calculate_range_value(contribution, index, rest_salary)
-        if index == 0
+        if index.zero?
           [contribution[:limit], rest_salary].min
         else
           previous_limit = CONTRIBUTION_TABLE[index - 1][:limit]
