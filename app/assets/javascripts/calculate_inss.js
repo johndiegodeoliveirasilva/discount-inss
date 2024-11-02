@@ -7,10 +7,10 @@ $('#price').on('change', function (e) {
 
     $.ajax({
       url: `/proposers/${propose_id}/finances/calculate`,
-      method: "POST", 
+      method: "POST",
       contentType: "application/json", 
       data: JSON.stringify({
-        value: salary,
+        salary: price,
       }),
       dataType: "json",
       headers: {
