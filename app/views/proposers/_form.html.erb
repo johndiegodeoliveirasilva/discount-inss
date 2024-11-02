@@ -1,0 +1,100 @@
+<div class="row d-flex justify-content-center align-items-center h-100">
+  <div class="col col-xl-12">
+    <div class="card" style="border-radius: 1rem; width: 100%;">
+      <div class="row g-0">
+        <div class="card-body p-4 p-lg-5 text-black">
+          <%= form_with(model: @proposer, local: true) do |f| %>
+          <div class="row">
+            <!-- Seção de Informações Pessoais -->
+            <div class="col-md-6">
+              <h3>Personal Information</h3>
+              <div class="form-group">
+                <%= f.label :full_name %>
+                <%= f.text_field :full_name, class: 'form-control' %>
+              </div>
+
+              <div class="form-group">
+                <%= f.label :document %>
+                <%= f.text_field :document, class: 'form-control' %>
+              </div>
+
+              <div class="form-group">
+                <%= f.label :birth_date %>
+                <%= f.date_field :birth_date, class: 'form-control' %>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <h3>Phones</h3>
+              <div>
+                <%= f.fields_for :phones do |phone_form| %>
+                  <%= render 'phone_fields', f: phone_form %>
+                <% end %>
+                <div>
+                  <%= link_to_add_association 'Add Phone', f, :phones, class: "btn btn-primary" %>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12 mt-4">
+              <hr>
+              <h3>Address</h3>
+                <%= f.fields_for :address do |address_form| %>
+                <div class="row">
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <%= address_form.label :zip_code %>
+                      <%= address_form.text_field :zip_code,class: 'form-control', require: true %>
+                    </div>
+                  </div>
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <%= f.label :state %>
+                      <%= address_form.text_field :state, class: 'form-control' %>
+                    </div>
+                  </div>
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <%= f.label :city %>
+                      <%= address_form.text_field :city, class: 'form-control' %>
+                    </div>
+                  </div>
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <%= f.label :neighborhood %>
+                      <%= address_form.text_field :neighborhood,  class: 'form-control' %>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row mt-3">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <%= f.label :number %>
+                      <%= address_form.text_field :number,  class: 'form-control' %>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <%= f.label :complement %>
+                      <%= address_form.text_field :complement,   class: 'form-control' %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+
+            <div class="form-group mt-4 text-center">
+              <%= f.submit 'Save Portfolio Item', class: 'btn btn-primary btn-block' %>
+            </div>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
