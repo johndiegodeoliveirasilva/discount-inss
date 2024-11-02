@@ -2,7 +2,7 @@
   <div class="inner">
     <h3 class="masthead-brand">Finance LTDA</h3>
     <nav class="nav nav-masthead justify-content-center app-nav">
-      <%= nav_helper 'nav-link', 'span' %>
+      <%= nav_helper 'nav-link', 'span' if current_user %>
       <%= login_helper 'nav-link' %>
     </nav>
   </div>

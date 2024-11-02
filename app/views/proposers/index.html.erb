@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="col col-xl-12">
+    <div class="card" style="border-radius: 1rem; width: 100%;">
+      <div class="row g-0">
+        <div class="card-body p-4 p-lg-5 text-black text-end">
+          <%= link_to "New", new_proposer_url, class: 'btn btn-primary' %>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Document</th>
+                <th scope="col">Birth Date</th>
+                <th scope="col">Phones</th>
+                <th scope="col">Income</th>
+                <th scope="col">Edit</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @proposers.each do |proposer| %>
+                <tr>
+                  <th scope="row"><%= proposer.id %></th>
+                  <td><%= proposer.full_name %></td>
+                  <td><%= proposer.document %></td>
+                  <td><%= proposer.birth_date.strftime('%d/%m/%Y') %></td>
+                  <td><%= proposer.phones.last(3).map(&:number).join(", ") %></td>
+                  <td><%= proposer.income || 0 %></td>
+                  <td><%= link_to 'Edit', edit_proposer_path(proposer), class: 'btn btn-primary' %></td>
+                </tr>
+                <% end %>
+            </tbody>
+          </table>
+        </div>
+        <div class="row align-items-center h-100">
+          <%= paginate @proposers, window: 2 %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

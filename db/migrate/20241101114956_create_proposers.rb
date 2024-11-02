@@ -6,6 +6,7 @@ class CreateProposers < ActiveRecord::Migration[5.2]
       t.string :document
       t.datetime :birth_date
       t.float :income
+      t.timestamps null: false
     end
   end
 end
