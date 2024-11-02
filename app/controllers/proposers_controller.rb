@@ -23,14 +23,10 @@ class ProposersController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @proposer.update(proposer_params)
-        format.html { redirect_to @proposer, notice: 'Proposer was successfully updated.' }
-        format.json { render :show, status: :ok, location: @proposer }
-      else
-        format.html { render :edit }
-        format.json { render json: @proposer.errors, status: :unprocessable_entity }
-      end
+    if @proposer.update(proposer_params)
+      redirect_to new_proposer_finance_url(@proposer)
+    else
+      render json: @proposer.errors, status: :unprocessable_entity
     end
   end
 
