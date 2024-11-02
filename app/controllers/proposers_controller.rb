@@ -24,8 +24,10 @@ class ProposersController < ApplicationController
 
   def update
     if @proposer.update(proposer_params)
-      redirect_to new_proposer_finance_url(@proposer)
+      flash[:notice] = 'Proposer was successfully updated.'
+      redirect_to proposers_url
     else
+      flash[:alert] = 'Proposer was not updated.'
       render json: @proposer.errors, status: :unprocessable_entity
     end
   end
