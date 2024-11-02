@@ -1,16 +1,29 @@
 $('#price').on('change', function (e) {
   $(function(){
-
     const price = $('#price').val()
-    const id = $('#proposer_id').val()
+    const propose_id = $('#proposer_id').val()
 
     $.ajax({
-      url: `/proposers/${id}/finances/calculate`,
+      url: `/proposers/${propose_id}/finances/calculate`,
       data: { values: price,
       dataType: "json"
     }
     }).done(function(data){
       $('#tax_value').val(data.amount)
+      $('#tax_value').maskMoney({
+        prefix: 'R$ ',
+        thousands: '.',
+        decimal: ',',
+        allowZero: true
+      })
+      
+      const tax_value = Number($('#tax_value').val().replace('R$ ', '').replace('.', '').replace(',', '.'))
+      const price = Number($('#price').val().replace('R$ ', '').replace('.', '').replace(', ', '.'))
+      
+      if (tax_value < price) {
+        const new_income = price - tax_value
+        $('#new_price').val(new_income)
+      }
     })
   })
 })
