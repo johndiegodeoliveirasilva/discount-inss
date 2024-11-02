@@ -1,6 +1,8 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   devise_for :users
-
+  mount Sidekiq::Web => '/sidekiq'
   root to: 'home#index'
 
   resources :proposers, only: %w[create new index show edit update destroy] do
