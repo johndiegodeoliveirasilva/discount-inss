@@ -8,6 +8,8 @@
     <title>
       Finance
     </title>
-    <%= render 'dashboard' %>
+    <% if user_signed_in? %>
+      <%= render 'dashboard' %>
+    <% end %>
   </head>
 </html>
