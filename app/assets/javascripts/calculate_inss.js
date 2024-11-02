@@ -17,11 +17,11 @@ $('#price').on('change', function (e) {
         allowZero: true
       })
       
-      const tax_value = Number($('#tax_value').val().replace('R$ ', '').replace('.', '').replace(',', '.'))
-      const price = Number($('#price').val().replace('R$ ', '').replace('.', '').replace(', ', '.'))
+      const tax_value = Number($('#tax_value').val())
+      const price = Number($('#price').val())
       
       if (tax_value < price) {
-        const new_income = price - tax_value
+        const new_income = (price - tax_value).toFixed(2)
         $('#new_price').val(new_income)
       }
     })
@@ -34,7 +34,7 @@ $('#finances_submit').on('click', function (e) {
   e.preventDefault()
 
   const id = $('#proposer_id').val()
-  const tax_value = $('#tax_value').val()
+  const new_price = $('#new_price').val()
 
   if ($('#price').val() == ''){
     $("#price").focus()
@@ -45,7 +45,7 @@ $('#finances_submit').on('click', function (e) {
       contentType: "application/json", 
       data: JSON.stringify({
         propose_id: id,
-        tax_value: tax_value
+        new_price: new_price
       }),
       dataType: "json",
       headers: {

@@ -12,6 +12,8 @@ class FinancesController < ApplicationController
   end
 
   def sync_tax
-    render json: { message: 'Taxa sincronizada com sucesso.' }, status: :ok
+    SyncTaxJob.perform_later(params[:propose_id], params[:new_price])
+
+    render json: { message: 'Syncing...' }, status: :ok
   end
 end
