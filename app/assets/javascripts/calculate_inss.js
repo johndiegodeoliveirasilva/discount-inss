@@ -10,7 +10,7 @@ $('#price').on('change', function (e) {
       method: "POST", 
       contentType: "application/json", 
       data: JSON.stringify({
-        value: price,
+        value: salary,
       }),
       dataType: "json",
       headers: {
