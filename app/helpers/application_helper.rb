@@ -21,10 +21,6 @@ module ApplicationHelper
       {
         url: proposers_path,
         title: 'Proponentes'
-      },
-      {
-        url: report_screen_path,
-        title: 'Relatorios'
       }
     ]
   end
