@@ -7,12 +7,12 @@ Este é um projeto desenvolvido em Ruby on Rails com o objetivo de fazer calculo
 - **Ruby on Rails** >= 5.2.8
 - **Ruby** 2.6.6
 - **PostgreSQL** para o banco de dados
-- **Bootstrap** para estilização front-end
-- **Chart.js** para visualização de dados em gráficos
-- **Rubocop Rails** para análise de estilo e padrões de código
-- **Kaminari** para paginação de registros
+- **Bootstrap** 5.3
+- **Chart.js** 0.1.7
+- **Rubocop Rails**  1.33
+- **Kaminari** 1.2
 - **Redis** como store para o Sidekiq
-- **Sidekiq** para processamento de jobs em background
+- **Sidekiq** 4.0
 
 ## Pré-requisitos
 
@@ -31,3 +31,10 @@ cd nome-do-projeto
 ```
 ### Configure as variaveis de ambiente do banco de dados
 Crie um arquivo ```.env```
+```shel
+POSTGRES_DB=nome do banco
+POSTGRES_USER= usuario
+POSTGRES_PASSWORD= senha
+REDIS_URL= redis://redis:6379/1
+RAILS_ENV=development
+```
