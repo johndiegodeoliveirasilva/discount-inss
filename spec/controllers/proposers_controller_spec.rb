@@ -53,9 +53,73 @@ RSpec.describe ProposersController, type: :controller do
   end
 
   describe 'GET #new' do
+    before { get :new }
+
+    it 'returns a success response' do
+      expect(response).to be_successful
+    end
+
+    it 'returns a proper response' do
+      expect(response).to have_http_status(200)
+    end
+
+    it 'renders the new template' do
+      expect(response).to render_template(:new)
+    end
+
+    it 'assigns @proposer' do
+      expect(assigns(:proposer)).to be_a_new(Proposer)
+    end
+
+    it 'builds the address' do
+      expect(assigns(:proposer).address).to be_present
+    end
   end
 
   describe 'GET #edit' do
+    let(:proposer) { create(:proposer) }
+
+    context 'when is valid' do
+
+      before { get :edit, params: { id: proposer.id } }
+
+      it 'returns a success response' do
+        expect(response).to be_successful
+      end
+
+      it 'returns a proper response' do
+        expect(response).to have_http_status(200)
+      end
+
+      it 'renders the edit template' do
+        expect(response).to render_template(:edit)
+      end
+
+      it 'assigns @proposer' do
+        expect(assigns(:proposer)).to eq(proposer)
+      end
+
+      it 'assigns @address' do
+        expect(assigns(:address)).to eq(proposer.address)
+      end
+    end
+
+    context 'when is invalid' do
+      it 'returns a status code of :redirect' do
+        get :edit, params: { id: 0 }
+        expect(response).to have_http_status(:redirect)
+      end
+
+      it 'redirects to the proposers_url' do
+        get :edit, params: { id: 0 }
+        expect(response).to redirect_to(proposers_url)
+      end
+
+      it 'returns a flash alert' do
+        get :edit, params: { id: 0 }
+        expect(flash[:alert]).to eq('Proposer not found.')
+      end
+    end
   end
 
   describe 'POST #create' do
@@ -141,8 +205,75 @@ RSpec.describe ProposersController, type: :controller do
   end
 
   describe 'PUT #update' do
+    let(:proposer) { create(:proposer) }
+
+    context 'when is valid' do
+      it 'updates the proposer' do
+        put :update, params: { id: proposer.id, proposer: { full_name: 'Jane Doe' } }
+        proposer.reload
+        expect(proposer.full_name).to eq('Jane Doe')
+      end
+    end
+
+    context 'when is invalid' do
+      before { put :update, params: { id: proposer.id, proposer: { document: '' } } }
+      it "returns a status code of :unprocessable_entity" do
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+
+      it "return a json with the errors" do
+        expect(response.body).to include("can't be blank")
+      end
+    end
   end
 
   describe 'DELETE #destroy' do
+    let(:proposer) { create(:proposer) }
+
+    context "when is valid" do
+      it 'deletes the proposer' do
+        expect {
+          delete :destroy, params: { id: proposer.id }
+        }.to change(Proposer, :count).by(0)
+      end
+
+      it 'returns a status code of :redirect' do
+        delete :destroy, params: { id: proposer.id }
+        expect(response).to have_http_status(:redirect)
+      end
+
+      it "redirects to the proposers_url" do
+        delete :destroy, params: { id: proposer.id }
+        expect(response).to redirect_to(proposers_url)
+      end
+
+      it "returns a flash notice" do
+        delete :destroy, params: { id: proposer.id }
+        expect(flash[:notice]).to eq('Proposer was successfully destroyed.')
+      end
+    end
+
+    context "when is invalid" do
+      it 'does not delete the proposer' do
+        expect {
+          delete :destroy, params: { id: 0 }
+        }.to change(Proposer, :count).by(0)
+      end
+
+      it 'returns a status code of :redirect' do
+        delete :destroy, params: { id: 0 }
+        expect(response).to have_http_status(:redirect)
+      end
+
+      it "redirects to the proposers_url" do
+        delete :destroy, params: { id: 0 }
+        expect(response).to redirect_to(proposers_url)
+      end
+
+      it "returns a flash alert" do
+        delete :destroy, params: { id: 0 }
+        expect(flash[:alert]).to eq('Proposer not found.')
+      end
+    end
   end
 end
