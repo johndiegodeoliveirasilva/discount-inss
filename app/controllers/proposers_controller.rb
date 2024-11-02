@@ -5,7 +5,8 @@ class ProposersController < ApplicationController
   before_action :proposer, only: %i[show edit update destroy]
 
   def index
-    @proposers = Proposer.page(params[:page]).per(5)
+    @q = Proposer.ransack(params[:q])
+    @proposers = @q.result(distinct: true).page(params[:page]).per(5)
   end
 
   def new
