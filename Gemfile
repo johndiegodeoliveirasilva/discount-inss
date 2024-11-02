@@ -10,6 +10,7 @@ gem 'rails', '~> 5.2.8', '>= 5.2.8.1'
 # Use pg as the database for Active Record
 gem 'pg', '~> 1.5', '>= 1.5.9'
 
+gem 'chart-js-rails'
 gem 'cocoon'
 
 # Loads environment variables from `.env`.

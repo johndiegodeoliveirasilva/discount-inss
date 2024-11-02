@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(version: 2024_11_01_131325) do
     t.string "city"
     t.string "state"
     t.string "zip_code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["proposer_id"], name: "index_addresses_on_proposer_id"
   end
 
@@ -30,6 +32,8 @@ ActiveRecord::Schema.define(version: 2024_11_01_131325) do
     t.bigint "proposer_id"
     t.string "number"
     t.string "phone_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["proposer_id"], name: "index_phones_on_proposer_id"
   end
 
@@ -39,6 +43,8 @@ ActiveRecord::Schema.define(version: 2024_11_01_131325) do
     t.string "document"
     t.datetime "birth_date"
     t.float "income"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_proposers_on_user_id"
   end
 
