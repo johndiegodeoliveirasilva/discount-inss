@@ -10,7 +10,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
 
   </head>
-
   <body class="text-center">
     <div class="cover-container d-flex w-100 p-3 mx-auto flex-column">
       <% if user_signed_in? %>
@@ -30,6 +29,7 @@
 
       <%= render 'shared/navbar' %>
       <%= yield %>
+      <%= alerts %>
       <%= render 'shared/footer' %>
     </div>
   </body>

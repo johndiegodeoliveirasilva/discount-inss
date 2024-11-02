@@ -14,7 +14,7 @@ class FinancesController < ApplicationController
 
   def sync_tax
     SyncTaxJob.perform_later(params[:propose_id], params[:new_price])
-
+    flash[:notice] = 'Proposer was successfully created.'
     render json: { message: 'Syncing...' }, status: :ok
   end
 end

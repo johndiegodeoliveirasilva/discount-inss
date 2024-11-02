@@ -5,7 +5,8 @@ class ProposersController < ApplicationController
   before_action :proposer, only: %i[show edit update destroy]
 
   def index
-    @proposers = Proposer.page(params[:page]).per(5)
+    @q = Proposer.ransack(params[:q])
+    @proposers = @q.result(distinct: true).page(params[:page]).per(5)
   end
 
   def new
@@ -24,8 +25,10 @@ class ProposersController < ApplicationController
 
   def update
     if @proposer.update(proposer_params)
-      redirect_to new_proposer_finance_url(@proposer)
+      flash[:notice] = 'Proposer was successfully updated.'
+      redirect_to proposers_url
     else
+      flash[:alert] = 'Proposer was not updated.'
       render json: @proposer.errors, status: :unprocessable_entity
     end
   end

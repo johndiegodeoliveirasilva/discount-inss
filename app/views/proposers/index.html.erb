@@ -1,3 +1,4 @@
+<%= render 'search_page' %>
 <div class="container">
   <div class="col col-xl-12">
     <div class="card" style="border-radius: 1rem; width: 100%;">
@@ -14,6 +15,7 @@
                 <th scope="col">Phones</th>
                 <th scope="col">Income</th>
                 <th scope="col">Edit</th>
+                <th scope="col">Destroy</th>
               </tr>
             </thead>
             <tbody>
@@ -26,6 +28,7 @@
                   <td><%= proposer.phones.last(3).map(&:number).join(", ") %></td>
                   <td><%= proposer.income || 0 %></td>
                   <td><%= link_to 'Edit', edit_proposer_path(proposer), class: 'btn btn-primary' %></td>
+                  <td><%= link_to 'Destroy', proposer, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
                 </tr>
                 <% end %>
             </tbody>

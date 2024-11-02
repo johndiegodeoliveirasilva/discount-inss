@@ -34,6 +34,13 @@ gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 
+# Ransack is the successor to the MetaSearch gem. It improves and expands upon MetaSearch's functionality,
+# but does not have a 100%-compatible API.
+gem 'ransack', '~> 2.3'
+
+# Toastr: Simple javascript toast notifications, plugged into the rails asset pipeline.
+gem 'toastr-rails', '~> 1.0', '>= 1.0.3'
+
 # Integrate SassC-Ruby into Rails.
 gem 'sassc-rails', '~> 2.1', '>= 2.1.2'
 
