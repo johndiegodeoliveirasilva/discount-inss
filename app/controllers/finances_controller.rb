@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FinancesController < ApplicationController
   before_action :authenticate_user!
 
@@ -10,6 +12,6 @@ class FinancesController < ApplicationController
   end
 
   def sync_tax
-    render json: { message: "Taxa sincronizada com sucesso." }, status: :ok
+    render json: { message: 'Taxa sincronizada com sucesso.' }, status: :ok
   end
 end

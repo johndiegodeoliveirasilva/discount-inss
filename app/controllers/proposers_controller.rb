@@ -24,7 +24,7 @@ class ProposersController < ApplicationController
   def update
     respond_to do |format|
       if @proposer.update(proposer_params)
-        format.html { redirect_to @proposer, notice: "Proposer was successfully updated." }
+        format.html { redirect_to @proposer, notice: 'Proposer was successfully updated.' }
         format.json { render :show, status: :ok, location: @proposer }
       else
         format.html { render :edit }
@@ -37,7 +37,7 @@ class ProposersController < ApplicationController
     @proposer.destroy
 
     respond_to do |format|
-      format.html { redirect_to proposers_url, notice: "Proposer was successfully destroyed." }
+      format.html { redirect_to proposers_url, notice: 'Proposer was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
