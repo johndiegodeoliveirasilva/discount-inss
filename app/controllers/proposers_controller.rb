@@ -19,8 +19,7 @@ class ProposersController < ApplicationController
     end
   end
 
-  def show
-  end
+  def show; end
 
   def edit
     @address = @proposer.address
@@ -31,8 +30,8 @@ class ProposersController < ApplicationController
       flash[:notice] = 'Proposer was successfully updated.'
       redirect_to proposers_url
     else
-     flash[:alert] = @proposer.errors.full_messages.join(", ")
-     redirect_to edit_proposer_url(@proposer)
+      flash[:alert] = @proposer.errors.full_messages.join(', ')
+      redirect_to edit_proposer_url(@proposer)
     end
   end
 
@@ -53,7 +52,7 @@ class ProposersController < ApplicationController
       redirect_to new_proposer_finance_url(@proposer)
       flash[:notice] = 'Proposer was successfully created.'
     else
-      flash[:alert] = @proposer.errors.full_messages.join(", ")
+      flash[:alert] = @proposer.errors.full_messages.join(', ')
       render :new
     end
   end
