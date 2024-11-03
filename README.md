@@ -13,7 +13,8 @@ Este é um projeto desenvolvido em Ruby on Rails com o objetivo de fazer calculo
 - **Kaminari** 1.2
 - **Redis** como store para o Sidekiq
 - **Sidekiq** 4.0
-
+- **Ransack** 2.3
+  
 ## Pré-requisitos
 
 Certifique-se de que você possui as seguintes ferramentas instaladas:
