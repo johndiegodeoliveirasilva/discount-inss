@@ -60,7 +60,7 @@ $('#finances_submit').on('click', function (e) {
         'X-CSRF-Token': csrfToken
       }
     }).done(function(data) {
-      window.location.href = "/";
+      window.location.href = "/proposers";
     }).fail(function(jqXHR, textStatus, errorThrown) {
       console.error("Erro na requisição:", textStatus, errorThrown);
     });
