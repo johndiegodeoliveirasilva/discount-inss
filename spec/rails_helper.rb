@@ -12,6 +12,7 @@ require 'support/factory_bot'
 
 require 'simplecov'
 SimpleCov.start 'rails' do
+   add_group 'Helpers', 'app/helpers'
   add_filter '/app/channels/'
 end
 # Requires supporting ruby files with custom matchers and macros, etc, in
