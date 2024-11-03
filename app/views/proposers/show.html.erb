@@ -1,0 +1,103 @@
+<div class="container">
+  <h1>Detail Proposer</h1>
+  <div class="row d-flex justify-content-center align-items-center h-100">
+    <div class="col col-xl-12">
+      <div class="card" style="border-radius: 1rem; width: 100%;">
+        <div class="row g-0">
+          <div class="card-body p-4 p-lg-5 text-black">
+            <%= form_with(model: @proposer, local: true) do |f| %>
+              <div class="row">
+                <div class="col-md-6">
+                  <h3>Personal Information</h3>
+                  <div class="form-group">
+                    <%= f.label :full_name %>
+                    <%= f.text_field :full_name, require: true, class: 'form-control', disabled: true %>
+                  </div>
+
+                  <div class="form-group">
+                    <%= f.label :document %>
+                    <%= f.text_field :document, class: 'form-control', disabled: true %>
+                  </div>
+
+                  <div class="form-group">
+                    <%= f.label :birth_date %>
+                    <%= f.date_field :birth_date, class: 'form-control', disabled: true %>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <h3>Phones</h3>
+                  <div>
+                    <% if f.object.phones.any? %>
+                      <% f.object.phones.each do |phone| %>
+                        <div class="input-group">
+                          <span class="input-group-text">Type and Number</span>
+                          <%= text_field_tag 'type', phone.phone_type, class: 'form-control', disabled: true %>
+                          <%= text_field_tag 'phone', phone.number, class: 'form-control', disabled: true %>
+                        </div>
+                        <hr>
+                        <% end %>
+                    <% else %>
+                      No phone avaliable
+                    <% end %>
+                  </div>
+                </div>
+                <div class="col-md-12 mt-4">
+                <hr>
+                <h3>Address</h3>
+                  <%= f.fields_for :address do |address_form| %>
+                  <div class="row">
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <%= address_form.label :zip_code %>
+                        <%= address_form.text_field :zip_code, class: 'form-control', disabled: true %>
+                      </div>
+                    </div>
+
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <%= f.label :state %>
+                        <%= address_form.text_field :state, class: 'form-control', disabled: true %>
+                      </div>
+                    </div>
+
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <%= f.label :city %>
+                        <%= address_form.text_field :city, class: 'form-control', disabled: true %>
+                      </div>
+                    </div>
+
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <%= f.label :neighborhood %>
+                        <%= address_form.text_field :neighborhood,  class: 'form-control', disabled: true %>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mt-3">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <%= f.label :number %>
+                        <%= address_form.text_field :number,  class: 'form-control', disabled: true %>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <%= f.label :complement %>
+                        <%= address_form.text_field :complement,   class: 'form-control', disabled: true %>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

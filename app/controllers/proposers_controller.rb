@@ -19,6 +19,9 @@ class ProposersController < ApplicationController
     end
   end
 
+  def show
+  end
+
   def edit
     @address = @proposer.address
   end
@@ -28,8 +31,8 @@ class ProposersController < ApplicationController
       flash[:notice] = 'Proposer was successfully updated.'
       redirect_to proposers_url
     else
-      flash[:alert] = 'Proposer was not updated.'
-      render json: @proposer.errors, status: :unprocessable_entity
+     flash[:alert] = @proposer.errors.full_messages.join(", ")
+     redirect_to edit_proposer_url(@proposer)
     end
   end
 
@@ -48,8 +51,10 @@ class ProposersController < ApplicationController
 
     if @proposer.save
       redirect_to new_proposer_finance_url(@proposer)
+      flash[:notice] = 'Proposer was successfully created.'
     else
-      render json: @proposer.errors, status: :unprocessable_entity
+      flash[:alert] = @proposer.errors.full_messages.join(", ")
+      render :new
     end
   end
 

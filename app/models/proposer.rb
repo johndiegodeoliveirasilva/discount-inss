@@ -10,4 +10,5 @@ class Proposer < ApplicationRecord
   accepts_nested_attributes_for :address, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :phones, reject_if: :all_blank, allow_destroy: true
   validates :full_name, :document, :birth_date, presence: true
+  validates_uniqueness_of :document
 end
