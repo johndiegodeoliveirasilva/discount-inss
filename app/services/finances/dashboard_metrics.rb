@@ -31,11 +31,11 @@ module Finances
     def group_by_income
       current_user.proposers.each do |proposer|
         INCOME_RANGES.each do |income_range|
-          income_range = income_range[:range].to_s
+          income_range = income_range[:range]
           next unless income_range.cover?(proposer.income.to_f)
 
-          @range_counts[income_range] = 0 if @range_counts[income_range].nil?
-          @range_counts[income_range] += 1
+          @range_counts[income_range.to_s] = 0 if @range_counts[income_range.to_s].nil?
+          @range_counts[income_range.to_s] += 1
 
           break
         end
