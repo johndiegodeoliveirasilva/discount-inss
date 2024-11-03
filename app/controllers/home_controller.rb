@@ -9,5 +9,6 @@ class HomeController < ApplicationController
     @total_proposer = result[:count_proposers]
     @statuses = result[:group_values]
     @counts = result[:group_keys]
+    @proposers_without_income = result[:count_proposers_without_income]
   end
 end
