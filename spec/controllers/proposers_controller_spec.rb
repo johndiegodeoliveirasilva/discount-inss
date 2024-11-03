@@ -54,6 +54,51 @@ RSpec.describe ProposersController, type: :controller do
     end
   end
 
+  describe 'GET #show' do
+    let(:proposer) { create(:proposer, user: user) }
+    before do
+      get :show, params: { id: proposer.id }
+    end
+    context 'when is valid' do
+      it 'returns a success response' do
+        expect(response).to be_successful
+      end
+
+      it 'returns a proper response' do
+        expect(response).to have_http_status(200)
+      end
+
+      it 'renders the show template' do
+        expect(response).to render_template(:show)
+      end
+
+      it 'assigns @proposer' do
+        expect(assigns(:proposer)).to eq(proposer)
+      end
+
+      it 'assigns @address' do
+        expect(assigns(:address)).to eq(proposer.address)
+      end
+    end
+
+    context 'when is invalid' do
+      it 'returns a status code of :redirect' do
+        get :show, params: { id: 0 }
+        expect(response).to have_http_status(:redirect)
+      end
+
+      it 'redirects to the proposers_url' do
+        get :show, params: { id: 0 }
+        expect(response).to redirect_to(proposers_url)
+      end
+
+      it 'returns a flash alert' do
+        get :show, params: { id: 0 }
+        expect(flash[:alert]).to eq('Proposer not found.')
+      end
+    end
+  end
+
   describe 'GET #new' do
     before { get :new }
 
@@ -193,15 +238,11 @@ RSpec.describe ProposersController, type: :controller do
         end.not_to change(Proposer, :count)
       end
 
-      it 'returns a status code of :unprocessable_entity' do
-        post :create, params: invalid_attributes
-        expect(response).to have_http_status(:unprocessable_entity)
-      end
+      it "re-renders the 'new' template" do
+        post :create, params: { proposer: invalid_attributes }
+        expect(response).to render_template(:new)
 
-      it 'returns the errors as JSON' do
-        post :create, params: invalid_attributes
-        json_response = JSON.parse(response.body)
-        expect(json_response).to include('document', 'full_name')
+        expect(flash[:alert]).to include("can't be blank")
       end
     end
   end
@@ -219,12 +260,9 @@ RSpec.describe ProposersController, type: :controller do
 
     context 'when is invalid' do
       before { put :update, params: { id: proposer.id, proposer: { document: '' } } }
-      it 'returns a status code of :unprocessable_entity' do
-        expect(response).to have_http_status(:unprocessable_entity)
-      end
 
       it 'return a json with the errors' do
-        expect(response.body).to include("can't be blank")
+        expect(flash[:alert]).to include("can't be blank")
       end
     end
   end

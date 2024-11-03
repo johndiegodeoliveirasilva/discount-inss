@@ -209,6 +209,10 @@ GEM
       thor (>= 0.19.0, < 2.0)
     rainbow (3.1.1)
     rake (13.2.1)
+    ransack (2.5.0)
+      activerecord (>= 5.2.4)
+      activesupport (>= 5.2.4)
+      i18n
     rb-fsevent (0.11.2)
     rb-inotify (0.11.1)
       ffi (~> 1.0)
@@ -278,6 +282,8 @@ GEM
       childprocess (>= 0.5, < 5.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2)
+    shoulda-matchers (5.3.0)
+      activesupport (>= 5.2.0)
     sidekiq (6.5.12)
       connection_pool (>= 2.2.5, < 3)
       rack (~> 2.0)
@@ -354,12 +360,14 @@ DEPENDENCIES
   puma (~> 3.11)
   rails (~> 5.2.8, >= 5.2.8.1)
   rails-controller-testing
+  ransack (~> 2.3)
   rspec-rails (~> 5.1, >= 5.1.2)
   rspec-sidekiq (~> 4.0, >= 4.0.2)
   rubocop (~> 1.33)
   sass-rails (~> 5.0)
   sassc-rails (~> 2.1, >= 2.1.2)
   selenium-webdriver
+  shoulda-matchers (~> 5.3)
   sidekiq (~> 6.5, >= 6.5.12)
   simplecov
   spring
