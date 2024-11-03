@@ -45,5 +45,10 @@ RAILS_ENV=development
 docker compose build
 docker compose up 
 ```
+## Popular o banco com seed
+```bash
+docker exec -it discount-inss bash
+rake db:seed
+```
 
 Seja feliz!!!
