@@ -20,12 +20,12 @@ RSpec.describe ProposersController, type: :controller do
     end
 
     it 'assigns @proposers' do
-      proposer = create(:proposer)
+      proposer = create(:proposer, user: user)
       expect(assigns(:proposers)).to eq([proposer])
     end
 
     context "when using the search" do
-      let(:proposer) { create(:proposer, full_name: 'John Doe') }
+      let(:proposer) { create(:proposer, full_name: 'John Doe', user: user) }
       it 'returns the proposer' do
         proposer
         get :index, params: { q: { full_name_cont: "John" } }
@@ -34,7 +34,7 @@ RSpec.describe ProposersController, type: :controller do
 
       context "when using multiples params" do
         it 'returns 5 proposers' do
-          5.times { |i| create(:proposer, full_name: "John Doe #{i}") }
+          5.times { |i| create(:proposer, full_name: "John Doe #{i}", user: user) }
 
           get :index, params: { q: { full_name_cont: "John" } }
           expect(assigns(:proposers).count).to eq(5)
@@ -43,7 +43,7 @@ RSpec.describe ProposersController, type: :controller do
 
       context "when using the pagination" do
         it 'returns the proposer' do
-          6.times { |i| create(:proposer, full_name: "John Doe #{i}") }
+          6.times { |i| create(:proposer, full_name: "John Doe #{i}", user: user) }
 
           get :index, params: { page: 2 }
           expect(assigns(:proposers).count).to eq(1)

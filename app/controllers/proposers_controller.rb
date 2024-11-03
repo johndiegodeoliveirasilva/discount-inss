@@ -6,7 +6,7 @@ class ProposersController < ApplicationController
 
   def index
     @q = Proposer.ransack(params[:q])
-    @proposers = @q.result(distinct: true).page(params[:page]).per(5)
+    @proposers = @q.result(distinct: true).by_user(current_user).page(params[:page]).per(5)
   end
 
   def new
