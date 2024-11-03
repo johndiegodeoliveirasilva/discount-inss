@@ -6,7 +6,7 @@ class ProposersController < ApplicationController
 
   def index
     @q = Proposer.ransack(params[:q])
-    @proposers = @q.result(distinct: true).page(params[:page]).per(5)
+    @proposers = @q.result(distinct: true).by_user(current_user).page(params[:page]).per(5)
   end
 
   def new
@@ -19,6 +19,8 @@ class ProposersController < ApplicationController
     end
   end
 
+  def show; end
+
   def edit
     @address = @proposer.address
   end
@@ -28,8 +30,8 @@ class ProposersController < ApplicationController
       flash[:notice] = 'Proposer was successfully updated.'
       redirect_to proposers_url
     else
-      flash[:alert] = 'Proposer was not updated.'
-      render json: @proposer.errors, status: :unprocessable_entity
+      flash[:alert] = @proposer.errors.full_messages.join(', ')
+      redirect_to edit_proposer_url(@proposer)
     end
   end
 
@@ -48,8 +50,10 @@ class ProposersController < ApplicationController
 
     if @proposer.save
       redirect_to new_proposer_finance_url(@proposer)
+      flash[:notice] = 'Proposer was successfully created.'
     else
-      render json: @proposer.errors, status: :unprocessable_entity
+      flash[:alert] = @proposer.errors.full_messages.join(', ')
+      render :new
     end
   end
 
@@ -57,6 +61,11 @@ class ProposersController < ApplicationController
 
   def proposer
     @proposer = Proposer.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    respond_to do |format|
+      format.html { redirect_to proposers_url, alert: 'Proposer not found.' }
+      format.json { render json: 'Proposer not found.', status: :not_found }
+    end
   end
 
   def proposer_params

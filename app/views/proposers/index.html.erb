@@ -12,10 +12,11 @@
                 <th scope="col">Name</th>
                 <th scope="col">Document</th>
                 <th scope="col">Birth Date</th>
-                <th scope="col">Phones</th>
                 <th scope="col">Income</th>
-                <th scope="col">Edit</th>
-                <th scope="col">Destroy</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
@@ -25,9 +26,10 @@
                   <td><%= proposer.full_name %></td>
                   <td><%= proposer.document %></td>
                   <td><%= proposer.birth_date.strftime('%d/%m/%Y') %></td>
-                  <td><%= proposer.phones.last(3).map(&:number).join(", ") %></td>
                   <td><%= proposer.income || 0 %></td>
+                  <td><%= link_to 'Show', proposer_path(proposer), class: 'btn btn-primary' %></td>
                   <td><%= link_to 'Edit', edit_proposer_path(proposer), class: 'btn btn-primary' %></td>
+                  <td><%= link_to 'Edit INSS', new_proposer_finance_url(proposer), class: 'btn btn-primary' %></td>
                   <td><%= link_to 'Destroy', proposer, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
                 </tr>
                 <% end %>

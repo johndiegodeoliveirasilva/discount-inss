@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 RSpec.configure do |config|
-  tables_to_keep = %w[]
+  tables_to_truncate = %w[users proposers addresses phones]
   config.before(:suite) do
-    DatabaseCleaner.clean_with(:truncation, only: tables_to_keep)
+    DatabaseCleaner.clean_with(:truncation, only: tables_to_truncate)
   end
   config.before(:each) do
     DatabaseCleaner.strategy = DatabaseCleaner::ActiveRecord::Truncation.new(only: tables_to_keep)

@@ -29,8 +29,8 @@ module ApplicationHelper
     nav_links = ''.dup
 
     nav_items.each do |item|
-      nav_links << "<#{tag_type}><a href='#{item[:url]}' class='#{style} #{active? item[:url]}'>#{item[:title]}
-                    </a></#{tag_type}>"
+      nav_links << "<#{tag_type}><a href='#{item[:url]}' class='#{style} #{active? item[:url]}'>#{item[:title]}" \
+                   "</a></#{tag_type}>"
     end
     nav_links.html_safe
   end
@@ -41,14 +41,13 @@ module ApplicationHelper
 
   def alerts
     flash.each_with_object([]) do |(type, message), flash_messages|
-      type = 'success' if type == 'notice'
-      type = 'error' if type == 'alert'
-      text = "<script>toastr.#{type}('#{message}');</script>"
-      flash_messages << text.html_safe if message
+      flash_messages << toastr_flash(type, message).html_safe if message
     end.join("\n").html_safe
   end
 
   def toastr_flash(type, message)
-
+    type = 'success' if type == 'notice'
+    type = 'error' if type == 'alert'
+    "<script>toastr.#{type}('#{message}');</script>"
   end
 end
