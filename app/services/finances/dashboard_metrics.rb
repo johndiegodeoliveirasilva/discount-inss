@@ -4,7 +4,12 @@ module Finances
   class DashboardMetrics
     attr_reader :current_user
 
-    RANGE = [['0', '1045.00'], ['1045.01', '2089.60'], ['2089.61', '3134.40'], ['3134.41', '6101.06']].freeze
+    INCOME_RANGES = [
+      { range: 0..1045.00 },
+      { range: 1045.01..2089.60 },
+      { range: 2089.61..3134.40 },
+      { range: 3134.41..6101.06 }
+    ].freeze
 
     def initialize(current_user)
       @current_user = current_user
@@ -25,11 +30,12 @@ module Finances
 
     def group_by_income
       current_user.proposers.each do |proposer|
-        RANGE.each do |min_value, max_value|
-          next unless proposer.income.to_f >= min_value.to_f && proposer.income.to_f <= max_value.to_f
+        INCOME_RANGES.each do |income_range|
+          income_range = income_range[:range].to_s
+          next unless income_range.cover?(proposer.income.to_f)
 
-          @range_counts["#{min_value}-#{max_value}"] = 0 if @range_counts["#{min_value}-#{max_value}"].nil?
-          @range_counts["#{min_value}-#{max_value}"] += 1
+          @range_counts[income_range] = 0 if @range_counts[income_range].nil?
+          @range_counts[income_range] += 1
 
           break
         end
@@ -49,7 +55,7 @@ module Finances
     end
 
     def daily_proposers
-      current_user.proposers.where(created_at: Date.today.all_day).count
+      current_user.proposers.where(created_at: Time.current.to_date.all_day).count
     end
   end
 end
