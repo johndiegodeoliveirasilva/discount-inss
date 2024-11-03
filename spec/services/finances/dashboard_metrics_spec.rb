@@ -53,6 +53,10 @@ RSpec.describe Finances::DashboardMetrics do
       it 'returns the group values' do
         expect(subject.call[:group_values]).to eq(['3134.41..6101.06', '1045.01..2089.6'])
       end
+
+      it 'returns the count of proposers without income' do
+        expect(subject.call[:count_proposers_without_income]).to eq(0)
+      end
     end
   end
 end

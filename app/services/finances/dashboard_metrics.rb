@@ -22,7 +22,8 @@ module Finances
         daily_proposers: daily_proposers,
         group_by_income: group_by_income,
         group_keys: range_values,
-        group_values: range_labels
+        group_values: range_labels,
+        count_proposers_without_income: proposers_without_income
       }
     end
 
@@ -56,6 +57,10 @@ module Finances
 
     def daily_proposers
       current_user.proposers.where(created_at: Time.current.to_date.all_day).count
+    end
+
+    def proposers_without_income
+      current_user.proposers.where(income: nil).count
     end
   end
 end
