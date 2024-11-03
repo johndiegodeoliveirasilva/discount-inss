@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.configure do |config|
   tables_to_truncate = %w[users proposers addresses phones]
   config.before(:suite) do
