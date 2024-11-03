@@ -38,3 +38,11 @@ POSTGRES_PASSWORD= senha
 REDIS_URL= redis://redis:6379/1
 RAILS_ENV=development
 ```
+## Construir e Executar o projeto
+
+```bash
+docker compose build
+docker compose up 
+```
+
+Seja feliz!!!
